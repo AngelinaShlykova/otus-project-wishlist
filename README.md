@@ -8,7 +8,6 @@
 |-----------|-----------|
 | Язык | Java 11+ |
 | Фреймворк | Selenium WebDriver, TestNG |
-| API тесты | REST Assured |
 | Логирование | Log4j2 |
 | Управление драйверами | WebDriver Manager |
 | Сборка | Maven |
