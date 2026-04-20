@@ -68,7 +68,7 @@ public class LoginPage extends BasePage {
 
     public WishlistPage loginSuccess(String email, String password) {
         login(email, password);
-        waitSeconds(2);
+        wait.until(ExpectedConditions.urlContains("/wishlists"));
         return new WishlistPage();
     }
 

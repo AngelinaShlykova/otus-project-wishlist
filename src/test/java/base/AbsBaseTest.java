@@ -9,7 +9,6 @@ import org.openqa.selenium.WebDriver;
 import org.testng.annotations.*;
 import org.testng.ITestResult;
 
-@Listeners(listeners.TestListener.class)
 public abstract class AbsBaseTest {
 
     protected static final Logger logger = LogManager.getLogger(AbsBaseTest.class);

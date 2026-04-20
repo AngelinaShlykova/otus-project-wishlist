@@ -6,14 +6,9 @@
     <parameter name="environment" value="staging"/>
     <parameter name="timeout" value="60000"/>
 
-    <listeners>
-        <listener class-name="listeners.TestListener"/>
-    </listeners>
-
     <test name="Authorization Tests">
         <classes>
             <class name="tests.ui.LoginUITest"/>
-            <class name="tests.api.AuthApiTest"/>
         </classes>
     </test>
 

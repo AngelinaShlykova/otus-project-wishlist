@@ -131,20 +131,6 @@ public abstract class BasePage {
     }
 
     /**
-     * Ждёт указанное время (для отладки).
-     * @param seconds секунды ожидания
-     */
-    protected void waitSeconds(int seconds) {
-        logger.debug("Пауза {} сек", seconds);
-        try {
-            Thread.sleep(seconds * 1000L);
-        } catch (InterruptedException e) {
-            Thread.currentThread().interrupt();
-            logger.warn("Поток прерван во время ожидания");
-        }
-    }
-
-    /**
      * Проверяет, что WebElement отображается.
      */
     protected boolean isElementDisplayed(WebElement element) {

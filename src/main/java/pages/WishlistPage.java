@@ -90,7 +90,7 @@ public class WishlistPage extends BasePage {
     public boolean isUserLoggedIn() {
         try {
             boolean isLoggedIn = logoutButton.isDisplayed();
-            logger.debug("Проверка авторизации (кнопка 'Выйти'): {}");
+            logger.debug("Проверка авторизации (кнопка 'Выйти'): {}", isLoggedIn);
             return isLoggedIn;
         } catch (Exception e) {
             logger.warn("Кнопка 'Выйти' не найдена: {}", e.getMessage());
@@ -101,7 +101,9 @@ public class WishlistPage extends BasePage {
     public WishlistPage clickCreateWishlistButton() {
         logger.info("Клик по кнопке 'Создать новый список'");
         click(createWishlistButton);
-        waitSeconds(1);
+        wait.until(ExpectedConditions.presenceOfElementLocated(
+                By.xpath("//div[contains(@class, 'card-title')]")
+        ));
         return this;
     }
 
@@ -120,7 +122,7 @@ public class WishlistPage extends BasePage {
     public WishlistPage saveWishlist() {
         logger.info("Сохранение wishlist");
         click(saveWishlistButton);
-        waitSeconds(2);
+        wait.until(ExpectedConditions.urlContains("/wishlists"));
         return this;
     }
 
@@ -128,7 +130,7 @@ public class WishlistPage extends BasePage {
     public WishlistPage clickAddItemButton() {
         logger.info("Клик по кнопке 'Добавить подарок'");
         click(addItemButton);
-        waitSeconds(1);
+        wait.until(ExpectedConditions.urlContains("/wishlists"));
         return this;
     }
 
@@ -160,7 +162,9 @@ public class WishlistPage extends BasePage {
     public WishlistPage saveItem() {
         logger.info("Сохранение подарка");
         click(saveItemButton);
-        waitSeconds(2);
+        wait.until(ExpectedConditions.presenceOfElementLocated(
+                By.xpath("//div[contains(@class, 'card-title')]")
+        ));
         return this;
     }
 
@@ -170,7 +174,7 @@ public class WishlistPage extends BasePage {
     public WishlistPage addItemWithAllFields(String itemName, String description, String url, String price) {
         logger.info("Добавление элемента со всеми полями");
         clickAddItemButton();
-        waitSeconds(1);
+        wait.until(ExpectedConditions.urlContains("/wishlists"));
         enterItemName(itemName);
         enterItemDescription(description);
         enterItemUrl(url);
@@ -183,7 +187,7 @@ public class WishlistPage extends BasePage {
         logger.info("Клик по кнопке 'Просмотр' #{}", index);
         if (index < viewButtons.size()) {
             viewButtons.get(index).click();
-            waitSeconds(2);
+            wait.until(ExpectedConditions.urlContains("/wishlists/"));
         }
         return this;
     }
@@ -222,7 +226,7 @@ public class WishlistPage extends BasePage {
             } catch (Exception e) {
                 logger.info("Модальное окно не появилось (удаление мгновенное)");
             }
-            waitSeconds(2);
+            wait.until(ExpectedConditions.urlContains("/wishlists"));
             boolean isDeleted = !hasWishlistByName(wishlistName);
             logger.info("Wishlist '{}' удалён: {}", wishlistName, isDeleted ? "✅" : "❌");
             return isDeleted;
@@ -254,7 +258,7 @@ public class WishlistPage extends BasePage {
     public LoginPage logout() {
         logger.info("Выход из системы");
         clickLogoutButton();
-        waitSeconds(2);
+        wait.until(ExpectedConditions.urlContains("/login"));
         return new LoginPage();
     }
 
